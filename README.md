@@ -1,2 +1,2 @@
-# MovieFinder
+# CoffeeShopsFinder
 Sandwich
