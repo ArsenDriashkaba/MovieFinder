@@ -1,0 +1,119 @@
+.container {
+}
+
+.title {
+  font-size: 3rem;
+  color: white;
+}
+
+.title2 {
+  color: var(--dark-blue);
+}
+
+.title2red {
+  transition: 1s ease-in-out;
+  color: rgb(254, 238, 21);
+}
+
+.subtitle {
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  color: var(--dark-blue);
+}
+
+.subtitleAnother {
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  color: rgb(216, 32, 216);
+  transition: 1s ease-in-out;
+}
+
+.viewStoresButton {
+  border: none;
+  background-color: white;
+  color: var(--dark-blue);
+  padding: 1rem 1.5rem;
+  transition: 0.1s ease-in-out;
+}
+
+.viewStoresButton:hover {
+  color: white;
+  background-color: var(--dark-blue);
+}
+
+/** 
+  Breakpoints:
+  ------------
+  sm: min-width: 640px; //small device
+  md: min-width: 768px; // medium device
+  lg: min-width: 1024px; // large device
+  xl: min-width: 1280px; // extra large device
+  2xl: min-width: 1536px; // 2 x extra large device
+**/
+
+/** sm breakpoint **/
+@media (min-width: 640px) {
+  .title {
+    font-size: 5rem /* 48px */;
+    line-height: 1;
+  }
+
+  .subtitle {
+    margin-top: 2.5rem;
+    max-width: 60rem;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    margin-top: 3.6rem;
+  }
+}
+
+/** md breakpoint **/
+@media (min-width: 768px) {
+  .title {
+    font-size: 6rem /* 60px */;
+    line-height: 1;
+  }
+
+  .subtitle {
+    margin-top: 3rem;
+  }
+
+  .viewStoresButton {
+    padding-top: 1.6rem /* 16px */;
+    padding-bottom: 1.6rem /* 16px */;
+    font-size: 1.8rem /* 18px */;
+    line-height: 2.8rem /* 28px */;
+    padding-left: 4rem /* 40px */;
+    padding-right: 4rem /* 40px */;
+  }
+}
+
+/** lg breakpoint **/
+@media (min-width: 1024px) {
+  .container {
+    text-align: left;
+  }
+
+  .title {
+    font-size: 7.2rem /* 72px */;
+    line-height: 1;
+  }
+
+  .title2 {
+    padding-left: 0.8rem;
+  }
+
+  .subtitle {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+/** xl breakpoint **/
+@media (min-width: 1280px) {
+  .title2 {
+    display: inline;
+  }
+}

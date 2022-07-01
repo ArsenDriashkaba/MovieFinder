@@ -1,0 +1,38 @@
+:root {
+  --dark-blue: rgb(48, 40, 98);
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  background: linear-gradient(to left, #e66465, #9198e5);
+  font-size: 62.5%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  background-color: white;
+  color: var(--dark-blue);
+  padding: 1rem 1.5rem;
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+button:hover {
+  color: white;
+  background-color: var(--dark-blue);
+}
