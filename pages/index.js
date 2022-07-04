@@ -1,12 +1,17 @@
-import { fetchCoffeeStores, getReqSearchUrl } from "../lib/coffeeStores";
+import { useState, useEffect, useContext } from "react";
 
 import Head from "next/head";
 import Banner from "../components/Banner";
 import CardList from "../components/CardList";
 
 import styles from "../styles/Home.module.css";
+
 import useTrackLocation from "../hooks/use-track-location";
-import { useState, useEffect } from "react";
+import { fetchCoffeeStores, getReqSearchUrl } from "../lib/coffeeStores";
+import {
+  CoffeeStoresContext,
+  ACTION_TYPES,
+} from "../context/coffeeStoresContext";
 
 export const getStaticProps = async () => {
   const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
@@ -19,28 +24,12 @@ export const getStaticProps = async () => {
   };
 };
 
-const fetchLocationCoffeeStores = async (coords, setter) => {
-  try {
-    if (coords.length == 0) {
-      return;
-    }
-
-    const [lat, long] = [...coords];
-    const url = getReqSearchUrl("coffee", lat, long, 9);
-    const coffeeShopsData = await fetchCoffeeStores(url);
-
-    console.log({ lat, long, url, coffeeShopsData });
-
-    setter(coffeeShopsData);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export default function Home({ coffeeShops }) {
-  const [locationCoffeeStores, setLocationCoffeeStores] = useState();
+  const { SET_COFFEE_STORES } = { ...ACTION_TYPES };
+  const { state, dispatch } = useContext(CoffeeStoresContext);
+  const { latitude, longitude } = { ...state };
 
-  const { isInSearch, locationCoords, handleTrackLocation, locationErrMsg } =
+  const { isInSearch, handleTrackLocation, locationErrMsg } =
     useTrackLocation();
 
   const handleButtonClick = () => {
@@ -50,24 +39,20 @@ export default function Home({ coffeeShops }) {
   useEffect(() => {
     const fetchLocationCoffeeStores = async () => {
       try {
-        if (locationCoords.length == 0) {
-          return;
-        }
-
-        const [lat, long] = [...locationCoords];
-        const url = getReqSearchUrl("coffee", lat, long, 9);
+        const url = getReqSearchUrl("coffee", latitude, longitude, 9);
         const coffeeShopsData = await fetchCoffeeStores(url);
 
-        console.log({ lat, long, url, coffeeShopsData });
-
-        setLocationCoffeeStores(coffeeShopsData);
+        dispatch({
+          type: SET_COFFEE_STORES,
+          payload: { coffeeStoresData: coffeeShopsData },
+        });
       } catch (err) {
         console.log(err);
       }
     };
 
     fetchLocationCoffeeStores();
-  }, [locationCoords]);
+  }, [latitude, longitude]);
 
   return (
     <div className={styles.container}>
@@ -85,7 +70,9 @@ export default function Home({ coffeeShops }) {
         {<span>{locationErrMsg}</span> && locationErrMsg}
         <CardList
           coffeeShops={
-            locationCoffeeStores ? locationCoffeeStores : coffeeShops
+            state.coffeeStoresData.length > 0
+              ? state.coffeeStoresData
+              : coffeeShops
           }
         />
       </main>

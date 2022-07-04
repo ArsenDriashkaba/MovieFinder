@@ -1,12 +1,11 @@
 import "../styles/globals.css";
-import Footer from "../components/Footer";
+import AppWrapper from "../context/coffeeStoresContext";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <AppWrapper>
       <Component {...pageProps} />
-      <Footer />
-    </>
+    </AppWrapper>
   );
 }
 
