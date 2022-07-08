@@ -1,22 +1,24 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import BackToHome from "../../components/BackToHome";
+import { useContext, useState, useEffect } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import styles from "../../styles/CoffeeStoreDynamic.module.css";
 
+import { isEmptyObj, findStoreById } from "../../lib";
 import { fetchCoffeeStores, getReqSearchUrl } from "../../lib/coffeeStores";
 import { generateStaticPaths, generateStoreInfo } from "../../lib/coffeStore";
 import coffeeStores from "../../data/coffee-stores.json";
+import { CoffeeStoresContext } from "../../context/coffeeStoresContext";
 
 export const getStaticProps = async ({ params }) => {
   const storeId = params.id;
   const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
   const coffeeShopsData = await fetchCoffeeStores(url);
-  const coffeeStore = coffeeShopsData.find(
-    (store) => store.fsq_id.toString() === storeId
-  );
+  const coffeeStore = findStoreById(coffeeShopsData, storeId);
 
   return {
     props: {
@@ -39,8 +41,20 @@ const CoffeeStore = ({ coffeeStore }) => {
     return <div>Loading...</div>;
   }
 
-  const { name, imgUrl } = { ...coffeeStore };
-  const { address, neighbourhood } = generateStoreInfo(coffeeStore);
+  const id = router.query.id;
+  const [coffeeStoreData, setCoffeeStoreData] = useState(coffeeStore);
+  const { state } = useContext(CoffeeStoresContext);
+
+  useEffect(() => {
+    if (isEmptyObj(coffeeStoreData)) {
+      const data = findStoreById(state.coffeeStoresData, id);
+
+      setCoffeeStoreData(data);
+    }
+  }, [id]);
+
+  const { name, imgUrl } = { ...coffeeStoreData };
+  const { address, neighbourhood } = generateStoreInfo(coffeeStoreData);
 
   return (
     <>
