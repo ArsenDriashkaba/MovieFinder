@@ -8,9 +8,13 @@ import Link from "next/link";
 
 import styles from "../../styles/CoffeeStoreDynamic.module.css";
 
-import { isEmptyObj, findStoreById } from "../../lib";
+import { isEmptyObj, findStoreById } from "../../utils";
 import { fetchCoffeeStores, getReqSearchUrl } from "../../lib/coffeeStores";
-import { generateStaticPaths, generateStoreInfo } from "../../lib/coffeStore";
+import {
+  generateStaticPaths,
+  generateStoreInfo,
+  getCoffeeStoreById,
+} from "../../lib/coffeeStore";
 import coffeeStores from "../../data/coffee-stores.json";
 import { CoffeeStoresContext } from "../../context/coffeeStoresContext";
 
@@ -18,7 +22,8 @@ export const getStaticProps = async ({ params }) => {
   const storeId = params.id;
   const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
   const coffeeShopsData = await fetchCoffeeStores(url);
-  const coffeeStore = findStoreById(coffeeShopsData, storeId);
+  const foundStore = findStoreById(coffeeShopsData, storeId);
+  const coffeeStore = foundStore ? foundStore : {};
 
   return {
     props: {
@@ -47,9 +52,15 @@ const CoffeeStore = ({ coffeeStore }) => {
 
   useEffect(() => {
     if (isEmptyObj(coffeeStoreData)) {
-      const data = findStoreById(state.coffeeStoresData, id);
+      if (state.coffeeStoresData.length == 0) {
+        const data = getCoffeeStoreById(id);
 
-      setCoffeeStoreData(data);
+        setCoffeeStoreData(data);
+      } else {
+        const data = findStoreById(state.coffeeStoresData, id);
+
+        setCoffeeStoreData(data);
+      }
     }
   }, [id]);
 

@@ -4,3 +4,7 @@ export const isEmptyObj = (object) => {
 
 export const findStoreById = (stores, id) =>
   stores.find((store) => store.fsq_id.toString() === id);
+
+export const getFieldsFromRecordsData = (records) => {
+  return records.map((record) => record.fields);
+};

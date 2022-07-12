@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { pushCoffeeStore } from "../lib/coffeeStore";
+
 import styles from "../styles/CoffeeCard.module.css";
 
 const CoffeeCard = ({ coffeeInfo }) => {
@@ -8,9 +10,13 @@ const CoffeeCard = ({ coffeeInfo }) => {
     ...coffeeInfo,
   };
 
+  const handleClick = async () => {
+    await pushCoffeeStore({ name, imgUrl, id: fsq_id });
+  };
+
   return (
     <Link href={`coffeeStore/${fsq_id}`}>
-      <div className={styles.container}>
+      <div onClick={handleClick} className={styles.container}>
         <h1 className={styles.title}>{name}</h1>
         <Image
           src={
