@@ -39,6 +39,10 @@ export default function Home({ coffeeShops }) {
   useEffect(() => {
     const fetchLocationCoffeeStores = async () => {
       try {
+        if (!latitude || !longitude) {
+          return;
+        }
+
         const url = getReqSearchUrl("coffee", latitude, longitude, 9);
         const coffeeShopsData = await fetchCoffeeStores(url);
 

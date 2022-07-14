@@ -1,16 +1,15 @@
 import database from "../../../config/database";
 import { findCoffeeStoreRecord } from "../../../utils/coffeeStores";
-import { getFieldsFromRecordsData } from "../../../utils";
 
 const getCoffeeStoreById = async (req, res) => {
   try {
     if (req.method === "GET") {
-      const id = req.query.id;
+      const id = req.query.id || req.params.id;
       const table = database("coffee-stores");
       const coffeeStoreRecord = await findCoffeeStoreRecord(table, id);
 
       if (coffeeStoreRecord) {
-        const data = getFieldsFromRecordsData(coffeeStoreRecord);
+        const data = coffeeStoreRecord.fields;
 
         res.status(200).send(data);
 

@@ -1,10 +1,15 @@
-import Head from "next/head";
+import axios from "axios";
+import useSWR from "swr";
 import { useRouter } from "next/router";
-import BackToHome from "../../components/BackToHome";
 import { useContext, useState, useEffect } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
+
+import Header from "../../components/Header";
+import IcoText from "../../components/IcoText";
+import UpVoteButton from "../../components/UpVoteButton";
 
 import styles from "../../styles/CoffeeStoreDynamic.module.css";
 
@@ -15,8 +20,8 @@ import {
   generateStoreInfo,
   getCoffeeStoreById,
 } from "../../lib/coffeeStore";
-import coffeeStores from "../../data/coffee-stores.json";
 import { CoffeeStoresContext } from "../../context/coffeeStoresContext";
+import constants from "../../constants/coffeeStores";
 
 export const getStaticProps = async ({ params }) => {
   const storeId = params.id;
@@ -33,25 +38,29 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
+  const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
+  const coffeeShopsData = await fetchCoffeeStores(url);
+
   return {
-    paths: generateStaticPaths(coffeeStores),
+    paths: generateStaticPaths(coffeeShopsData),
     fallback: true,
   };
 };
 
 const CoffeeStore = ({ coffeeStore }) => {
   const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
+  const { state } = useContext(CoffeeStoresContext);
 
   const id = router.query.id;
   const [coffeeStoreData, setCoffeeStoreData] = useState(coffeeStore);
-  const { state } = useContext(CoffeeStoresContext);
+  const [rating, setRating] = useState(0);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const fetchUrlSwr = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}getCoffeeStore/${id}`;
+  const { data, error } = useSWR(fetchUrlSwr, (url) => axios.get(url));
 
   useEffect(() => {
-    if (isEmptyObj(coffeeStoreData)) {
+    if (!coffeeStoreData || isEmptyObj(coffeeStoreData)) {
       if (state.coffeeStoresData.length == 0) {
         const data = getCoffeeStoreById(id);
 
@@ -64,64 +73,61 @@ const CoffeeStore = ({ coffeeStore }) => {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (data) {
+      setRating(data.data.rating);
+    }
+    if (error) {
+      setErrorMsg(errorMsg);
+    }
+  }, [data]);
+
   const { name, imgUrl } = { ...coffeeStoreData };
   const { address, neighbourhood } = generateStoreInfo(coffeeStoreData);
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <Head>
         <title>{name}</title>
       </Head>
+      <Header title={name} />
 
-      <header className={styles.titleContainer}>
-        <h1 className={styles.title}>{name}</h1>
-        <BackToHome />
-      </header>
       <section className={styles.mainSection}>
         <div className={styles.imageContainer}>
           <Image
             className={styles.image}
-            src={
-              imgUrl ||
-              "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
-            }
+            src={imgUrl || constants.DEFAULT_STORE_IMG_URL}
             width={500}
             height={500}
             alt={name}
           />
         </div>
+
         <div className={styles.storeInfoContainer}>
           <>
-            <div className={styles.ratingContainer}>
-              <Image
-                src="/static/icons/star.svg"
-                width={20}
-                height={20}
-                alt="adressLogo"
-              />
-              <p className={styles.rating}>{0}</p>
-            </div>
-            <div className={styles.addressContainer}>
-              <Image
-                src="/static/icons/location.svg"
-                width={20}
-                height={20}
-                alt="adressLogo"
-              />
-              <p className={styles.address}>{address}</p>
-            </div>
-            <div className={styles.neighbourhoodContainer}>
-              <Image
-                src="/static/icons/home.svg"
-                width={20}
-                height={20}
-                alt="neighbourhoodLogo"
-              />
-              <p className={styles.neighbourhood}>{neighbourhood}</p>
-            </div>
+            <IcoText text={rating} icoUrl="star.svg" altIcoMsg="ratingLogo" />
+            <IcoText
+              text={address}
+              icoUrl="location.svg"
+              altIcoMsg="addressLogo"
+            />
+            <IcoText
+              text={neighbourhood}
+              icoUrl="home.svg"
+              altIcoMsg="neighbourhoodLogo"
+            />
           </>
           <div className={styles.buttonContainer}>
-            <button className={styles.upVote}>Up Vote</button>
+            <UpVoteButton
+              coffeeStoreId={id}
+              text="Up Vote"
+              currRating={rating}
+              setRating={setRating}
+            />
             <Link href={"/"}>
               <button className={styles.toStore}>To Store</button>
             </Link>

@@ -38,9 +38,7 @@
   justify-content: space-evenly;
 }
 
-.address,
-.neighbourhood,
-.rating {
+.icoText {
   font-size: 2rem;
   margin: 0 1rem;
 }
@@ -60,9 +58,7 @@
   background-color: white;
 }
 
-.neighbourhoodContainer,
-.addressContainer,
-.ratingContainer {
+.icoTextContainer {
   display: flex;
   align-items: center;
 }
