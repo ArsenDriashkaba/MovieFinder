@@ -1,6 +1,6 @@
 import { object, string, number } from "yup";
 
-const coffeeStoreSchema = object({
+const createCoffeeStoreSchema = object({
   id: string().required().min(1),
   name: string().required().min(3).max(30),
   address: string(),
@@ -9,4 +9,4 @@ const coffeeStoreSchema = object({
   imgUrl: string(),
 });
 
-export default coffeeStoreSchema;
+export default createCoffeeStoreSchema;

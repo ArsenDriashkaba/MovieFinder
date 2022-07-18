@@ -3,7 +3,7 @@ import {
   findCoffeeStoreRecord,
   updateRecord,
 } from "../../../utils/coffeeStores";
-import coffeeStoreSchema from "../../../utils/schemas/coffeeStore";
+import updateCoffeeStoreSchema from "../../../utils/schemas/updateCoffeeStoreSchema";
 
 const updateCoffeeStoreById = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ const updateCoffeeStoreById = async (req, res) => {
       if (coffeeStoreRecord) {
         const fields = req.body;
 
-        await coffeeStoreSchema.validate(fields);
+        await updateCoffeeStoreSchema.validate(fields);
 
         const updatedRecord = await updateRecord(
           table,
