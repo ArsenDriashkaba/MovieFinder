@@ -89,6 +89,10 @@ const CoffeeStore = ({ coffeeStore }) => {
     return <div>Loading...</div>;
   }
 
+  if (error) {
+    return <p>Gerara here dude</p>;
+  }
+
   return (
     <>
       <Head>

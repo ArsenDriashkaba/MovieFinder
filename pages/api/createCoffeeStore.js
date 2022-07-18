@@ -1,5 +1,6 @@
 import database from "../../config/database";
 import { findCoffeeStoreRecord, createRecord } from "../../utils/coffeeStores";
+import coffeeStoreSchema from "../../utils/schemas/coffeeStore";
 
 const createCoffeeStore = async (req, res) => {
   try {
@@ -13,7 +14,11 @@ const createCoffeeStore = async (req, res) => {
         return;
       }
 
-      const newRecord = await createRecord(table, req.body);
+      const fields = req.body;
+
+      await coffeeStoreSchema.validate(fields);
+
+      const newRecord = await createRecord(table, fields);
 
       res.status(200).send(newRecord);
     }
