@@ -54,6 +54,7 @@ const CoffeeStore = ({ coffeeStore }) => {
   const id = router.query.id;
   const [coffeeStoreData, setCoffeeStoreData] = useState(coffeeStore);
   const [rating, setRating] = useState(0);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const fetchUrlSwr = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}getCoffeeStore/${id}`;
@@ -113,7 +114,11 @@ const CoffeeStore = ({ coffeeStore }) => {
 
         <div className={styles.storeInfoContainer}>
           <>
-            <IcoText text={rating} icoUrl="star.svg" altIcoMsg="ratingLogo" />
+            <IcoText
+              text={isUpdating ? "Updating..." : rating}
+              icoUrl="star.svg"
+              altIcoMsg="ratingLogo"
+            />
             <IcoText
               text={address}
               icoUrl="location.svg"
@@ -131,6 +136,7 @@ const CoffeeStore = ({ coffeeStore }) => {
               text="Up Vote"
               currRating={rating}
               setRating={setRating}
+              setUpdating={setIsUpdating}
             />
             <Link href={"/"}>
               <button className={styles.toStore}>To Store</button>
