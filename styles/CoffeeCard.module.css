@@ -5,11 +5,13 @@
   border-radius: 2rem;
   transition: 0.2s ease-in-out;
   cursor: pointer;
-  max-width: 30rem;
+  max-width: 38rem;
+  min-width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: auto;
 }
 
 .container:hover {
@@ -25,4 +27,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.image {
+  border-radius: 1rem;
 }

@@ -1,8 +1,22 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 4rem;
+  grid-column-gap: 3rem;
   grid-row-gap: 3rem;
-  width: 90%;
+  width: 100%;
   margin: 5rem auto;
+}
+
+@media (max-width: 850px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 525px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }

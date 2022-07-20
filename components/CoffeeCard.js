@@ -30,10 +30,11 @@ const CoffeeCard = ({ coffeeInfo }) => {
       <div onClick={handleOnClick} className={styles.container}>
         <h1 className={styles.title}>{name}</h1>
         <Image
+          className={styles.image}
           src={imgUrl || constants.DEFAULT_STORE_IMG_URL}
           alt={name}
-          width="230"
-          height="200"
+          width="280"
+          height="250"
         />
       </div>
     </Link>
