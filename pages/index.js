@@ -7,14 +7,29 @@ import CardList from "../components/CardList";
 import styles from "../styles/Home.module.css";
 
 import useTrackLocation from "../hooks/use-track-location";
-import { fetchCoffeeStores, getReqSearchUrl } from "../lib/coffeeStores";
+import { fetchCoffeeStores, getSearchPlacesUrl } from "../lib/coffeeStores";
 import {
   CoffeeStoresContext,
   ACTION_TYPES,
 } from "../context/coffeeStoresContext";
+import constants from "../constants/coffeeStores";
+import { getStoreLocality } from "../lib/coffeeStore";
+
+const {
+  DEFAULT_SEARCH_LATITUDE,
+  DEFAULT_SEARCH_LONGITUDE,
+  DEFAULT_SEARCH_LIMIT1,
+  DEFAULT_SEARCH_LIMIT2,
+  SEARCH_QUERY,
+} = { ...constants };
 
 export const getStaticProps = async () => {
-  const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
+  const url = getSearchPlacesUrl(
+    SEARCH_QUERY,
+    DEFAULT_SEARCH_LATITUDE,
+    DEFAULT_SEARCH_LONGITUDE,
+    DEFAULT_SEARCH_LIMIT1
+  );
   const coffeeShopsData = await fetchCoffeeStores(url);
 
   return {
@@ -24,17 +39,17 @@ export const getStaticProps = async () => {
   };
 };
 
+const useCoffeeStoresContext = () => useContext(CoffeeStoresContext);
+
 export default function Home({ coffeeShops }) {
-  const { SET_COFFEE_STORES } = { ...ACTION_TYPES };
-  const { state, dispatch } = useContext(CoffeeStoresContext);
+  const { state, dispatch } = useCoffeeStoresContext();
   const { latitude, longitude } = { ...state };
 
-  const { isInSearch, handleTrackLocation, locationErrMsg } =
-    useTrackLocation();
-
-  const handleButtonClick = () => {
-    handleTrackLocation();
-  };
+  const {
+    isLoading: isInSearch,
+    fetchData: handleButtonClick,
+    error: locationErrMsg = "error",
+  } = useTrackLocation();
 
   useEffect(() => {
     const fetchLocationCoffeeStores = async () => {
@@ -43,13 +58,31 @@ export default function Home({ coffeeShops }) {
           return;
         }
 
-        const url = getReqSearchUrl("coffee", latitude, longitude, 9);
+        const url = getSearchPlacesUrl(
+          SEARCH_QUERY,
+          latitude,
+          longitude,
+          DEFAULT_SEARCH_LIMIT2
+        );
         const coffeeShopsData = await fetchCoffeeStores(url);
 
+        if (coffeeShopsData.length == 0) {
+          return;
+        }
+
+        const locality = getStoreLocality(coffeeShopsData);
+
         dispatch({
-          type: SET_COFFEE_STORES,
+          type: ACTION_TYPES.SET_SEARCH_LOCALITY,
+          payload: { searchLocality: locality },
+        });
+
+        dispatch({
+          type: ACTION_TYPES.SET_COFFEE_STORES,
           payload: { coffeeStoresData: coffeeShopsData },
         });
+
+        console.log(state.searchLocality);
       } catch (err) {
         console.log(err);
       }
@@ -71,8 +104,9 @@ export default function Home({ coffeeShops }) {
           buttonText={isInSearch ? "Loading..." : "View stores"}
           handleOnClick={handleButtonClick}
         />
-        {<span>{locationErrMsg}</span> && locationErrMsg}
+        {locationErrMsg && <span>{locationErrMsg}</span>}
         <CardList
+          locality={state.searchLocality}
           coffeeShops={
             state.coffeeStoresData.length > 0
               ? state.coffeeStoresData

@@ -14,7 +14,7 @@ import UpVoteButton from "../../components/UpVoteButton";
 import styles from "../../styles/CoffeeStoreDynamic.module.css";
 
 import { isEmptyObj, findStoreById } from "../../utils";
-import { fetchCoffeeStores, getReqSearchUrl } from "../../lib/coffeeStores";
+import { fetchCoffeeStores, getSearchPlacesUrl } from "../../lib/coffeeStores";
 import {
   generateStaticPaths,
   generateStoreInfo,
@@ -25,7 +25,7 @@ import constants from "../../constants/coffeeStores";
 
 export const getStaticProps = async ({ params }) => {
   const storeId = params.id;
-  const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
+  const url = getSearchPlacesUrl("coffee", "48.1461013", "17.1080403", 12);
   const coffeeShopsData = await fetchCoffeeStores(url);
   const foundStore = findStoreById(coffeeShopsData, storeId);
   const coffeeStore = foundStore ? foundStore : {};
@@ -38,7 +38,7 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const url = getReqSearchUrl("coffee", "48.1461013", "17.1080403", 12);
+  const url = getSearchPlacesUrl("coffee", "48.1461013", "17.1080403", 12);
   const coffeeShopsData = await fetchCoffeeStores(url);
 
   return {

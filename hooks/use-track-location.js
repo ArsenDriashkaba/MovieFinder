@@ -4,16 +4,17 @@ import {
   ACTION_TYPES,
 } from "../context/coffeeStoresContext";
 
+const geolocationErrMsg = "Can't access geolocation data...";
+
 const useTrackLocation = () => {
   const { SET_LAT, SET_LONG } = { ...ACTION_TYPES };
 
-  const geolocationErrMsg = "Can't access geolocation data...";
   const [locationErrMsg, setLocationErrMsg] = useState("");
   const [isInSearch, setIsInSearch] = useState(false);
 
   const { dispatch } = useContext(CoffeeStoresContext);
 
-  const success = (position) => {
+  const handleSuccess = (position) => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
@@ -24,7 +25,7 @@ const useTrackLocation = () => {
     setIsInSearch(false);
   };
 
-  const error = () => {
+  const handleError = () => {
     setLocationErrMsg(geolocationErrMsg);
     setIsInSearch(false);
   };
@@ -38,10 +39,14 @@ const useTrackLocation = () => {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
   };
 
-  return { locationErrMsg, handleTrackLocation, isInSearch };
+  return {
+    error: locationErrMsg,
+    fetchData: handleTrackLocation,
+    isLoading: isInSearch,
+  };
 };
 
 export default useTrackLocation;
