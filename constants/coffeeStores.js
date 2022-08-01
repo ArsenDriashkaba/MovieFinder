@@ -6,6 +6,7 @@ const constants = {
   DEFAULT_SEARCH_LIMIT1: 12,
   DEFAULT_SEARCH_LIMIT2: 9,
   SEARCH_QUERY: "coffee",
+  DEFAULT_QUERY_FIELDS: ["fsq_id", "location", "name", "link", "photos"],
 };
 
 export default constants;

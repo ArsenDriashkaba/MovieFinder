@@ -21,6 +21,7 @@ const {
   DEFAULT_SEARCH_LIMIT1,
   DEFAULT_SEARCH_LIMIT2,
   SEARCH_QUERY,
+  DEFAULT_QUERY_FIELDS,
 } = { ...constants };
 
 export const getStaticProps = async () => {
@@ -28,7 +29,8 @@ export const getStaticProps = async () => {
     SEARCH_QUERY,
     DEFAULT_SEARCH_LATITUDE,
     DEFAULT_SEARCH_LONGITUDE,
-    DEFAULT_SEARCH_LIMIT1
+    DEFAULT_SEARCH_LIMIT1,
+    DEFAULT_QUERY_FIELDS
   );
   const coffeeShopsData = await fetchCoffeeStores(url);
 
@@ -62,7 +64,8 @@ export default function Home({ coffeeShops }) {
           SEARCH_QUERY,
           latitude,
           longitude,
-          DEFAULT_SEARCH_LIMIT2
+          DEFAULT_SEARCH_LIMIT2,
+          DEFAULT_QUERY_FIELDS
         );
         const coffeeShopsData = await fetchCoffeeStores(url);
 

@@ -22,10 +22,27 @@ import {
 } from "../../lib/coffeeStore";
 import { CoffeeStoresContext } from "../../context/coffeeStoresContext";
 import constants from "../../constants/coffeeStores";
+import PhotoSlider from "../../components/PhotoSlider";
+
+const {
+  DEFAULT_SEARCH_LATITUDE,
+  DEFAULT_SEARCH_LONGITUDE,
+  DEFAULT_SEARCH_LIMIT1,
+  DEFAULT_SEARCH_LIMIT2,
+  SEARCH_QUERY,
+  DEFAULT_QUERY_FIELDS,
+} = { ...constants };
+
+const url = getSearchPlacesUrl(
+  SEARCH_QUERY,
+  DEFAULT_SEARCH_LATITUDE,
+  DEFAULT_SEARCH_LONGITUDE,
+  DEFAULT_SEARCH_LIMIT1,
+  DEFAULT_QUERY_FIELDS
+);
 
 export const getStaticProps = async ({ params }) => {
   const storeId = params.id;
-  const url = getSearchPlacesUrl("coffee", "48.1461013", "17.1080403", 12);
   const coffeeShopsData = await fetchCoffeeStores(url);
   const foundStore = findStoreById(coffeeShopsData, storeId);
   const coffeeStore = foundStore ? foundStore : {};
@@ -38,7 +55,6 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const url = getSearchPlacesUrl("coffee", "48.1461013", "17.1080403", 12);
   const coffeeShopsData = await fetchCoffeeStores(url);
 
   return {
@@ -102,15 +118,7 @@ const CoffeeStore = ({ coffeeStore }) => {
       <Header title={name} />
 
       <section className={styles.mainSection}>
-        <div className={styles.imageContainer}>
-          <Image
-            className={styles.image}
-            src={imgUrl || constants.DEFAULT_STORE_IMG_URL}
-            width={500}
-            height={500}
-            alt={name}
-          />
-        </div>
+        <PhotoSlider storeId={id} />
 
         <div className={styles.storeInfoContainer}>
           <>
