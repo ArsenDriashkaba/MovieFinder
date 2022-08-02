@@ -4,22 +4,8 @@ import { Navigation, Pagination, Autoplay } from "swiper";
 import styles from "../styles/PhotoSlider.module.css";
 
 import PhotoSlide from "./PhotoSlide";
-import { useState, useEffect } from "react";
-import { getCoffeeStoreImages } from "../lib/coffeeStore";
 
-const PhotoSlider = ({ storeId }) => {
-  const [coffeeStoreImages, setCoffeeStoreImages] = useState([]);
-
-  useEffect(() => {
-    const fetchStoreImages = async () => {
-      const images = await getCoffeeStoreImages(storeId);
-
-      setCoffeeStoreImages(images);
-    };
-
-    fetchStoreImages();
-  }, [storeId]);
-
+const PhotoSlider = ({ coffeeStoreImages }) => {
   return (
     <Swiper
       className={styles.container}

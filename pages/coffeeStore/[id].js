@@ -3,7 +3,6 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useContext, useState, useEffect } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 
@@ -19,16 +18,18 @@ import {
   generateStaticPaths,
   generateStoreInfo,
   getCoffeeStoreById,
+  getCoffeeStoreComments,
 } from "../../lib/coffeeStore";
 import { CoffeeStoresContext } from "../../context/coffeeStoresContext";
 import constants from "../../constants/coffeeStores";
 import PhotoSlider from "../../components/PhotoSlider";
+import { getCoffeeStoreImages } from "../../lib/coffeeStore";
+import CommentSection from "../../components/CommentSection";
 
 const {
   DEFAULT_SEARCH_LATITUDE,
   DEFAULT_SEARCH_LONGITUDE,
   DEFAULT_SEARCH_LIMIT1,
-  DEFAULT_SEARCH_LIMIT2,
   SEARCH_QUERY,
   DEFAULT_QUERY_FIELDS,
 } = { ...constants };
@@ -47,9 +48,15 @@ export const getStaticProps = async ({ params }) => {
   const foundStore = findStoreById(coffeeShopsData, storeId);
   const coffeeStore = foundStore ? foundStore : {};
 
+  const images = await getCoffeeStoreImages(storeId);
+  const comments = await getCoffeeStoreComments(storeId);
+  console.log(comments);
+
   return {
     props: {
       coffeeStore,
+      images,
+      comments,
     },
   };
 };
@@ -63,7 +70,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-const CoffeeStore = ({ coffeeStore }) => {
+const CoffeeStore = ({ coffeeStore, images, comments }) => {
   const router = useRouter();
   const { state } = useContext(CoffeeStoresContext);
 
@@ -99,7 +106,7 @@ const CoffeeStore = ({ coffeeStore }) => {
     }
   }, [data]);
 
-  const { name, imgUrl } = { ...coffeeStoreData };
+  const { name } = { ...coffeeStoreData };
   const { address, neighbourhood } = generateStoreInfo(coffeeStoreData);
 
   if (router.isFallback) {
@@ -118,7 +125,7 @@ const CoffeeStore = ({ coffeeStore }) => {
       <Header title={name} />
 
       <section className={styles.mainSection}>
-        <PhotoSlider storeId={id} />
+        <PhotoSlider coffeeStoreImages={images} />
 
         <div className={styles.storeInfoContainer}>
           <>
@@ -152,6 +159,7 @@ const CoffeeStore = ({ coffeeStore }) => {
           </div>
         </div>
       </section>
+      <CommentSection comments={comments} />
     </>
   );
 };

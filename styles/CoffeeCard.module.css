@@ -1,8 +1,8 @@
 .container {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--transparent);
   padding: 2rem;
   border: none;
-  border-radius: 2rem;
+  border-radius: var(--default-border-radius);
   transition: 0.2s ease-in-out;
   cursor: pointer;
   max-width: 38rem;
@@ -16,7 +16,7 @@
 
 .container:hover {
   transform: scale(1.05);
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--transparent-hover);
 }
 
 .title {

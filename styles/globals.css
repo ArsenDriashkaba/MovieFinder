@@ -1,5 +1,8 @@
 :root {
   --dark-blue: rgb(48, 40, 98);
+  --transparent: rgba(255, 255, 255, 0.2);
+  --transparent-hover: rgba(255, 255, 255, 0.4);
+  --default-border-radius: 2rem;
 }
 
 html,

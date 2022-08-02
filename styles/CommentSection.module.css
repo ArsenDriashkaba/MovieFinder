@@ -1,0 +1,34 @@
+.section {
+  width: 70%;
+  margin: 0 auto;
+  background-color: var(--transparent);
+  border-radius: var(--default-border-radius);
+  padding: 2rem;
+}
+
+.container {
+  width: 80%;
+  margin: 1rem auto;
+  display: flex;
+  background-color: var(--transparent-hover);
+  border-radius: var(--default-border-radius);
+  padding: 1rem;
+  align-items: center;
+}
+
+.infoContainer {
+  font-size: 1.8rem;
+  width: 80%;
+}
+
+.imageContainer {
+  width: 6.4rem;
+  height: 6.4rem;
+  margin-right: 2rem;
+  position: relative;
+}
+
+.dateContainer {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+}
