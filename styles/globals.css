@@ -4,6 +4,8 @@
   --title2-font-size: 8.7rem;
 
   --dark-transparent-bg: rgba(38, 25, 16, 0.85);
+  --card-transparent-info-bg: rgba(38, 25, 16, 0.6);
+  --light-bg: rgb(242, 242, 242);
   --transparent: rgba(255, 255, 255, 0.2);
   --transparent-hover: rgba(255, 255, 255, 0.4);
   --default-border-radius: 2rem;
@@ -14,8 +16,6 @@
 html,
 body {
   font-family: "Montserrat", sans-serif;
-
-  background: linear-gradient(to left, #e66465, #9198e5);
   font-size: 62.5%;
 }
 

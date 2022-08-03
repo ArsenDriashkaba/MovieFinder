@@ -1,34 +1,46 @@
 .container {
-  background-color: var(--transparent);
-  padding: 2rem;
   border: none;
-  border-radius: var(--default-border-radius);
+  border-radius: var(--border-radius);
   transition: 0.2s ease-in-out;
   cursor: pointer;
-  max-width: 38rem;
-  min-width: 20rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
+  width: 100%;
+  height: 40rem;
+  position: relative;
+  font-weight: 300;
+  color: white;
+}
+
+.container:hover .infoContainer {
+  min-height: 30%;
 }
 
 .container:hover {
   transform: scale(1.05);
-  background-color: var(--transparent-hover);
+}
+
+.infoContainer {
+  transition: 0.2s ease-in-out;
+  padding: 2rem;
+  background-color: var(--card-transparent-info-bg);
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  width: 100%;
+  min-height: 10%;
+  position: absolute;
+  bottom: 0;
+}
+
+.test {
+  display: none;
 }
 
 .title {
   margin-bottom: 1rem;
-  font-size: 2rem;
-  text-align: center;
-  max-width: 25rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 2.5rem;
+  font-weight: 400;
 }
 
 .image {
   border-radius: 1rem;
+  object-fit: cover;
 }

@@ -28,14 +28,15 @@ const CoffeeCard = ({ coffeeInfo }) => {
   return (
     <Link href={`coffeeStore/${fsq_id}`}>
       <div onClick={handleOnClick} className={styles.container}>
-        <h1 className={styles.title}>{name}</h1>
         <Image
           className={styles.image}
           src={imgUrl || constants.DEFAULT_STORE_IMG_URL}
           alt={name}
-          width="280"
-          height="250"
+          layout="fill"
         />
+        <div className={styles.infoContainer}>
+          <h1 className={styles.title}>{name}</h1>
+        </div>
       </div>
     </Link>
   );

@@ -4,7 +4,7 @@ import styles from "../styles/CardList.module.css";
 
 const CardList = ({ coffeeShops, locality }) => {
   return (
-    <>
+    <section className={styles.cardListContainer}>
       {locality && (
         <h2 className={styles.localityHeader}>
           Coffee shops in <span className={styles.locality}>{locality}</span>{" "}
@@ -16,7 +16,7 @@ const CardList = ({ coffeeShops, locality }) => {
           <CoffeeCard coffeeInfo={shop} key={shop.fsq_id} />
         ))}
       </div>
-    </>
+    </section>
   );
 };
 
