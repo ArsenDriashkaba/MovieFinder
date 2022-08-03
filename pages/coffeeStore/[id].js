@@ -50,7 +50,6 @@ export const getStaticProps = async ({ params }) => {
 
   const images = await getCoffeeStoreImages(storeId);
   const comments = await getCoffeeStoreComments(storeId);
-  console.log(comments);
 
   return {
     props: {

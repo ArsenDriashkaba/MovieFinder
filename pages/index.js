@@ -84,8 +84,6 @@ export default function Home({ coffeeShops }) {
           type: ACTION_TYPES.SET_COFFEE_STORES,
           payload: { coffeeStoresData: coffeeShopsData },
         });
-
-        console.log(state.searchLocality);
       } catch (err) {
         console.log(err);
       }
@@ -104,7 +102,7 @@ export default function Home({ coffeeShops }) {
 
       <main className={styles.main}>
         <Banner
-          buttonText={isInSearch ? "Loading..." : "View stores"}
+          buttonText={isInSearch ? "Loading..." : "Discover"}
           handleOnClick={handleButtonClick}
         />
         {locationErrMsg && <span>{locationErrMsg}</span>}
