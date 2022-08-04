@@ -1,10 +1,11 @@
 :root {
+  --cardList-gap: 2rem;
   --border-radius: 1.5rem;
   --title1-font-size: 7.5rem;
   --title2-font-size: 8.7rem;
 
-  --dark-transparent-bg: rgba(38, 25, 16, 0.85);
-  --card-transparent-info-bg: rgba(38, 25, 16, 0.6);
+  --dark-transparent-bg: rgba(38, 25, 16, 0.75);
+  --card-transparent-info-bg: rgba(38, 25, 16, 0.7);
   --light-bg: rgb(242, 242, 242);
   --transparent: rgba(255, 255, 255, 0.2);
   --transparent-hover: rgba(255, 255, 255, 0.4);
@@ -43,4 +44,13 @@ button {
 button:hover {
   color: white;
   background-color: var(--dark-blue);
+}
+
+/*________________________RESPONSIVENESS_________________________*/
+
+@media (max-width: 1920px) {
+  :root {
+    --border-radius: 1rem;
+    --cardList-gap: 1.4rem;
+  }
 }

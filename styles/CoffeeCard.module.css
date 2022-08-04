@@ -4,14 +4,10 @@
   transition: 0.2s ease-in-out;
   cursor: pointer;
   width: 100%;
-  height: 40rem;
+  height: 33vh;
   position: relative;
   font-weight: 300;
   color: white;
-}
-
-.container:hover .infoContainer {
-  min-height: 30%;
 }
 
 .container:hover {
@@ -43,4 +39,12 @@
 .image {
   border-radius: 1rem;
   object-fit: cover;
+}
+
+/*________________________RESPONSIVENESS_________________________*/
+
+@media (max-width: 1920px) {
+  .title {
+    font-size: 2rem;
+  }
 }

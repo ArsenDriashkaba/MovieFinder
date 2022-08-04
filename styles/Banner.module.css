@@ -103,7 +103,7 @@
 
 @media (max-width: 640px) {
   .title {
-    font-size: 5rem /* 48px */;
+    font-size: 5rem;
     line-height: 1;
   }
 
@@ -121,7 +121,7 @@
 /** md breakpoint **/
 @media (max-width: 768px) {
   .title {
-    font-size: 6rem /* 60px */;
+    font-size: 6rem;
     line-height: 1;
   }
 
@@ -130,19 +130,19 @@
   }
 
   .discoverStoresButton {
-    padding-top: 1.6rem /* 16px */;
-    padding-bottom: 1.6rem /* 16px */;
-    font-size: 1.8rem /* 18px */;
-    line-height: 2.8rem /* 28px */;
-    padding-left: 4rem /* 40px */;
-    padding-right: 4rem /* 40px */;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
 /** lg breakpoint **/
 @media (max-width: 1024px) {
   .title {
-    font-size: 7.2rem /* 72px */;
+    font-size: 7.2rem;
     line-height: 1;
   }
 
@@ -160,5 +160,28 @@
 @media (max-width: 1280px) {
   .title2 {
     display: inline;
+  }
+}
+
+@media (max-width: 1920px) {
+  .imageContainer {
+    width: 50%;
+  }
+
+  .title {
+    font-size: calc(var(--title1-font-size) * 0.7);
+  }
+
+  .title2 {
+    font-size: calc(var(--title2-font-size) * 0.7);
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .discoverStoresButton {
+    font-size: 1.8rem;
+    padding: 1.5rem 4rem;
   }
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import { pushCoffeeStore, generateStoreInfo } from "../lib/coffeeStore";
 import constants from "../constants/coffeeStores";
@@ -34,9 +35,9 @@ const CoffeeCard = ({ coffeeInfo }) => {
           alt={name}
           layout="fill"
         />
-        <div className={styles.infoContainer}>
+        <motion.div className={styles.infoContainer}>
           <h1 className={styles.title}>{name}</h1>
-        </div>
+        </motion.div>
       </div>
     </Link>
   );

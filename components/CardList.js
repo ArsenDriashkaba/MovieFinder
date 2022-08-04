@@ -1,16 +1,13 @@
 import CoffeeCard from "./CoffeeCard";
 
 import styles from "../styles/CardList.module.css";
+import CardListHeader from "./CardListHeader";
 
 const CardList = ({ coffeeShops, locality }) => {
   return (
     <section className={styles.cardListContainer}>
-      {locality && (
-        <h2 className={styles.localityHeader}>
-          Coffee shops in <span className={styles.locality}>{locality}</span>{" "}
-          near you ;)
-        </h2>
-      )}
+      <CardListHeader locality={locality} />
+
       <div className={styles.container}>
         {coffeeShops?.map((shop) => (
           <CoffeeCard coffeeInfo={shop} key={shop.fsq_id} />

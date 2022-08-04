@@ -19,6 +19,8 @@ import {
   generateStoreInfo,
   getCoffeeStoreById,
   getCoffeeStoreComments,
+  getCoffeeStoreAdditionalInfo,
+  additionalInfoFields,
 } from "../../lib/coffeeStore";
 import { CoffeeStoresContext } from "../../context/coffeeStoresContext";
 import constants from "../../constants/coffeeStores";
@@ -50,12 +52,17 @@ export const getStaticProps = async ({ params }) => {
 
   const images = await getCoffeeStoreImages(storeId);
   const comments = await getCoffeeStoreComments(storeId);
+  const additionalInfo = await getCoffeeStoreAdditionalInfo(
+    storeId,
+    additionalInfoFields
+  );
 
   return {
     props: {
       coffeeStore,
       images,
       comments,
+      additionalInfo,
     },
   };
 };
@@ -69,7 +76,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-const CoffeeStore = ({ coffeeStore, images, comments }) => {
+const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
   const router = useRouter();
   const { state } = useContext(CoffeeStoresContext);
 
@@ -158,6 +165,7 @@ const CoffeeStore = ({ coffeeStore, images, comments }) => {
           </div>
         </div>
       </section>
+
       <CommentSection comments={comments} />
     </>
   );
