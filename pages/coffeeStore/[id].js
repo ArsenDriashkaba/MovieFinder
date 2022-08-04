@@ -3,12 +3,9 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useContext, useState, useEffect } from "react";
 
-import Link from "next/link";
 import Head from "next/head";
 
-import Header from "../../components/Header";
-import IcoText from "../../components/IcoText";
-import UpVoteButton from "../../components/UpVoteButton";
+import HomeLogo from "../../components/HomeLogo";
 
 import styles from "../../styles/CoffeeStoreDynamic.module.css";
 
@@ -27,6 +24,9 @@ import constants from "../../constants/coffeeStores";
 import PhotoSlider from "../../components/PhotoSlider";
 import { getCoffeeStoreImages } from "../../lib/coffeeStore";
 import CommentSection from "../../components/CommentSection";
+import Map from "../../components/Map";
+import StoreInfo from "../../components/StoreInfo";
+import IcoTextList from "../../components/IcoTextList";
 
 const {
   DEFAULT_SEARCH_LATITUDE,
@@ -124,50 +124,27 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
   }
 
   return (
-    <>
+    <section className={styles.page}>
       <Head>
         <title>{name}</title>
       </Head>
-      <Header title={name} />
 
-      <section className={styles.mainSection}>
-        <PhotoSlider coffeeStoreImages={images} />
+      <div className={styles.contentWrapper}>
+        <HomeLogo />
 
-        <div className={styles.storeInfoContainer}>
-          <>
-            <IcoText
-              text={isUpdating ? "Updating..." : rating}
-              icoUrl="star.svg"
-              altIcoMsg="ratingLogo"
-            />
-            <IcoText
-              text={address}
-              icoUrl="location.svg"
-              altIcoMsg="addressLogo"
-            />
-            <IcoText
-              text={neighbourhood}
-              icoUrl="home.svg"
-              altIcoMsg="neighbourhoodLogo"
-            />
-          </>
-          <div className={styles.buttonContainer}>
-            <UpVoteButton
-              coffeeStoreId={id}
-              text="Up Vote"
-              currRating={rating}
-              setRating={setRating}
-              setUpdating={setIsUpdating}
-            />
-            <Link href={"/"}>
-              <button className={styles.toStore}>To Store</button>
-            </Link>
+        <section className={styles.mainSection}>
+          <div className={styles.sliderInfoWrapper}>
+            <PhotoSlider coffeeStoreImages={images} />
+            <StoreInfo />
           </div>
-        </div>
-      </section>
 
-      <CommentSection comments={comments} />
-    </>
+          <IcoTextList />
+        </section>
+
+        <CommentSection comments={comments} />
+        <Map />
+      </div>
+    </section>
   );
 };
 
