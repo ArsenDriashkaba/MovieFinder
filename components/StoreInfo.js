@@ -5,11 +5,13 @@ import LocalRating from "./LocalRating";
 import Pricing from "./Pricing";
 import UpVoteButton from "./UpVoteButton";
 
-const StoreInfo = ({}) => {
+const StoreInfo = ({ value }) => {
+  const { price } = { ...value };
+
   return (
     <div className={styles.storeInfoContainer}>
       <h1 className={styles.title}>Title</h1>
-      <Pricing />
+      <Pricing value={price} />
 
       <div className={styles.ratingContainer}>
         <GlobalRating />

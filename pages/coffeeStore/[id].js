@@ -123,6 +123,8 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
     return <p>Gerara here dude</p>;
   }
 
+  console.log(additionalInfo);
+
   return (
     <section className={styles.page}>
       <Head>
@@ -135,7 +137,7 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
         <section className={styles.mainSection}>
           <div className={styles.sliderInfoWrapper}>
             <PhotoSlider coffeeStoreImages={images} />
-            <StoreInfo />
+            <StoreInfo value={additionalInfo} />
           </div>
 
           <IcoTextList />

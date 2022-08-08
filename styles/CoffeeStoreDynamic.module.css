@@ -29,6 +29,11 @@
   min-height: 85vh;
 }
 
+.title {
+  font-size: 3.6rem;
+  font-weight: 500;
+}
+
 .sliderInfoWrapper {
   width: 100%;
   height: 70vh;
@@ -41,7 +46,22 @@
   display: flex;
   flex-direction: column;
   width: 35%;
+  height: 90%;
   margin: 0 auto;
+  padding-left: 5rem;
+}
+
+.pricingContainer {
+  display: flex;
+  margin: 0.4rem 0;
+}
+
+.priceIco {
+  width: 1.2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .icoTextList {
