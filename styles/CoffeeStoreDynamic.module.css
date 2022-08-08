@@ -49,11 +49,12 @@
   height: 90%;
   margin: 0 auto;
   padding-left: 5rem;
+  position: relative;
 }
 
 .pricingContainer {
   display: flex;
-  margin: 0.4rem 0;
+  margin: 1rem 0;
 }
 
 .priceIco {
@@ -64,35 +65,75 @@
   position: relative;
 }
 
+.ratingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.ratingIco {
+  margin-left: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.descriptionContainer {
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+}
+
 .icoTextList {
   width: 100%;
   height: 15vh;
-  border: 0.2rem solid blue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .icoText {
-  font-size: 2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
   margin: 0 1rem;
 }
 
-.upVote,
-.toStore {
-  margin: 0 1rem;
+.buttonContainer {
+  position: absolute;
+  bottom: 0;
 }
 
-.toStore {
-  color: white;
-  background-color: var(--dark-blue);
-}
-
-.toStore:hover {
-  color: var(--dark-blue);
-  background-color: white;
+.linkButton {
+  padding: 1.3rem 4rem;
+  font-size: 1.5rem;
+  color: black;
+  background-color: var(--coffee-color);
 }
 
 .icoTextContainer {
   display: flex;
   align-items: center;
+}
+
+.reviewsHeader {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.commentsMapWrapper {
+  display: flex;
+  padding: 3rem 0;
+}
+
+.upVote {
+  position: relative;
 }
 
 @media (max-width: 950px) {

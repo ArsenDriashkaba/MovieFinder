@@ -82,7 +82,7 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
 
   const id = router.query.id;
   const [coffeeStoreData, setCoffeeStoreData] = useState(coffeeStore);
-  const [rating, setRating] = useState(0);
+  const [likes, setLikes] = useState(0);
   const [isUpdating, setIsUpdating] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -105,15 +105,33 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
 
   useEffect(() => {
     if (data) {
-      setRating(data.data.rating);
+      setLikes(data.data.rating);
     }
     if (error) {
       setErrorMsg(errorMsg);
     }
   }, [data]);
 
-  const { name } = { ...coffeeStoreData };
+  const title = coffeeStoreData?.name;
   const { address, neighbourhood } = generateStoreInfo(coffeeStoreData);
+  const storeInfoValue = {
+    id,
+    ...additionalInfo,
+    likes,
+    title,
+    setIsUpdating,
+    likes,
+    setLikes,
+  };
+  const icoTextList = [
+    { text: address, ico: "location.svg", altIcoMsg: "location icon" },
+    {
+      text: neighbourhood,
+      ico: "navigation.svg",
+      altIcoMsg: "navigation icon",
+    },
+    { text: additionalInfo?.tel, ico: "phone.svg", altIcoMsg: "phone icon" },
+  ];
 
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -123,12 +141,10 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
     return <p>Gerara here dude</p>;
   }
 
-  console.log(additionalInfo);
-
   return (
     <section className={styles.page}>
       <Head>
-        <title>{name}</title>
+        <title>{title}</title>
       </Head>
 
       <div className={styles.contentWrapper}>
@@ -137,14 +153,17 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
         <section className={styles.mainSection}>
           <div className={styles.sliderInfoWrapper}>
             <PhotoSlider coffeeStoreImages={images} />
-            <StoreInfo value={additionalInfo} />
+            <StoreInfo value={storeInfoValue} />
           </div>
 
-          <IcoTextList />
+          <IcoTextList dataList={icoTextList} />
         </section>
 
-        <CommentSection comments={comments} />
-        <Map />
+        <h2 className={styles.reviewsHeader}>Reviews</h2>
+        <section className={styles.commentsMapWrapper}>
+          <CommentSection comments={comments} />
+          <Map />
+        </section>
       </div>
     </section>
   );

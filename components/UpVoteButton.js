@@ -1,10 +1,10 @@
+import Image from "next/image";
 import { updateCoffeeStore } from "../lib/coffeeStore";
 
 import styles from "../styles/CoffeeStoreDynamic.module.css";
 
 const UpVoteButton = ({
   coffeeStoreId,
-  text,
   currRating,
   setRating,
   setUpdating,
@@ -20,7 +20,7 @@ const UpVoteButton = ({
 
   return (
     <button onClick={handleOnClick} className={styles.upVote}>
-      {text}
+      <Image src="/static/icons/heart.svg" layout="fill" alt="like ico" />
     </button>
   );
 };

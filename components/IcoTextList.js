@@ -1,7 +1,14 @@
 import styles from "../styles/CoffeeStoreDynamic.module.css";
+import IcoText from "./IcoText";
 
-const IcoTextList = ({ icoTextMap }) => {
-  return <div className={styles.icoTextList}></div>;
+const IcoTextList = ({ dataList }) => {
+  return (
+    <div className={styles.icoTextList}>
+      {dataList.map((entity) => (
+        <IcoText data={entity} />
+      ))}
+    </div>
+  );
 };
 
 export default IcoTextList;

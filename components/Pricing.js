@@ -3,7 +3,6 @@ import Image from "next/image";
 import styles from "../styles/CoffeeStoreDynamic.module.css";
 
 const Pricing = ({ value }) => {
-  console.log({ value });
   return (
     <div className={styles.pricingContainer}>
       {[...Array(value)].map((_) => (

@@ -1,13 +1,14 @@
 .section {
-  width: 70%;
-  margin: 0 auto;
+  width: 65%;
+  height: 90vh;
+  overflow: scroll;
   background-color: var(--transparent);
   border-radius: var(--default-border-radius);
   padding: 2rem;
 }
 
 .container {
-  width: 80%;
+  width: 100%;
   margin: 1rem auto;
   display: flex;
   background-color: var(--transparent-hover);
@@ -18,12 +19,12 @@
 
 .infoContainer {
   font-size: 1.8rem;
-  width: 80%;
+  width: 70%;
 }
 
 .imageContainer {
-  width: 6.4rem;
-  height: 6.4rem;
+  width: 6rem;
+  height: 6rem;
   margin-right: 2rem;
   position: relative;
 }

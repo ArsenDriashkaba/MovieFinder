@@ -12,7 +12,7 @@ const Comment = ({ commentInfo }) => {
       <div className={styles.imageContainer}>
         <Image
           className={styles.image}
-          src="/static/icons/user.png"
+          src="/static/images/user.png"
           layout="fill"
           alt="user-ico"
         />

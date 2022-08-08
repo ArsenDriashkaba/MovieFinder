@@ -2,11 +2,13 @@ import Image from "next/image";
 
 import styles from "../styles/CoffeeStoreDynamic.module.css";
 
-const IcoText = ({ text, icoUrl, altIcoMsg }) => {
+const IcoText = ({ data }) => {
+  const { text, ico, altIcoMsg } = { ...data };
+
   return (
     <div className={styles.icoTextContainer}>
       <Image
-        src={`/static/icons/${icoUrl}`}
+        src={`/static/icons/${ico}`}
         width={20}
         height={20}
         alt={altIcoMsg}

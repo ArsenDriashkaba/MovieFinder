@@ -1,4 +1,6 @@
 .mapContainer {
-  width: 50%;
-  height: 50vh;
+  width: 33%;
+  margin-left: 2rem;
+  height: 90vh;
+  border-radius: var(--default-border-radius);
 }
