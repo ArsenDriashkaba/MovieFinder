@@ -5,8 +5,8 @@ import styles from "../styles/CoffeeStoreDynamic.module.css";
 const Pricing = ({ value }) => {
   return (
     <div className={styles.pricingContainer}>
-      {[...Array(value)].map((_) => (
-        <div className={styles.priceIco}>
+      {[...Array(value)].map((_, index) => (
+        <div className={styles.priceIco} key={index}>
           <Image src="/static/icons/price.svg" alt="price" layout="fill" />
         </div>
       ))}

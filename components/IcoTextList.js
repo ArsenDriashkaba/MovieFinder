@@ -4,8 +4,8 @@ import IcoText from "./IcoText";
 const IcoTextList = ({ dataList }) => {
   return (
     <div className={styles.icoTextList}>
-      {dataList.map((entity) => (
-        <IcoText data={entity} />
+      {dataList.map((entity, index) => (
+        <IcoText data={entity} key={index} />
       ))}
     </div>
   );

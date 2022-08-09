@@ -4,6 +4,10 @@
   border-radius: 1rem;
 }
 
+.imageContainer {
+  position: relative;
+}
+
 .image {
   object-fit: cover;
   object-position: center;

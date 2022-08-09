@@ -4,8 +4,8 @@
   --title1-font-size: 7.5rem;
   --title2-font-size: 8.7rem;
 
-  --gray: rgb(220, 220, 220);
-  --transparentGray: rgba(220, 220, 220, 0.35);
+  --gray: rgb(232, 232, 232);
+  --transparentGray: rgba(220, 220, 220, 0.5);
   --logo-main-color: rgb(61, 61, 61);
   --dark-transparent-bg: rgba(38, 25, 16, 0.75);
   --card-transparent-info-bg: rgba(38, 25, 16, 0.7);
@@ -69,10 +69,15 @@ button:hover {
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   color: var(--gray);
+  transform: scale(1.1);
 }
 
 .swiper-pagination-bullet {
   background-color: var(--gray);
+}
+
+.swiper-pagination-bullet:hover {
+  transform: scale(1.4);
 }
 
 .swiper-pagination-bullet-active {

@@ -46,6 +46,7 @@ const useTrackLocation = () => {
     error: locationErrMsg,
     fetchData: handleTrackLocation,
     isLoading: isInSearch,
+    setIsInSearch,
   };
 };
 

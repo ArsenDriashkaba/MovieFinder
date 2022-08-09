@@ -21,7 +21,12 @@ const UpVoteButton = ({
   return (
     <button onClick={handleOnClick} className={styles.upVote}>
       <div className={styles.imageContainer}>
-        <Image src="/static/icons/heart.svg" layout="fill" alt="like ico" />
+        <Image
+          className={styles.upVoteIco}
+          src="/static/icons/heart.svg"
+          layout="fill"
+          alt="like ico"
+        />
       </div>
     </button>
   );

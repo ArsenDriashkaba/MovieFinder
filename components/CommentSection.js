@@ -6,7 +6,7 @@ const CommentSection = ({ comments }) => {
   return (
     <section className={styles.section}>
       {comments?.map((comment) => (
-        <Comment commentInfo={comment} />
+        <Comment commentInfo={comment} key={comment?.id} />
       ))}
     </section>
   );

@@ -1,4 +1,7 @@
 import Image from "next/image";
+
+import { motion } from "framer-motion";
+
 import styles from "../styles/Banner.module.css";
 
 const Banner = ({ handleOnClick, buttonText }) => {
@@ -26,13 +29,25 @@ const Banner = ({ handleOnClick, buttonText }) => {
           </div>
         </div>
 
-        <Image
+        <motion.div
           className={styles.steam}
-          src="/static/images/steam.png"
-          layout="responsive"
-          width={686}
-          height={686}
-        />
+          animate={{
+            x: [-10, 0, -10],
+            y: -10,
+            opacity: [0.1, 0.3, 0.5, 0.3, 0.1],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 5,
+          }}
+        >
+          <Image
+            src="/static/images/steam.png"
+            layout="responsive"
+            width={686}
+            height={686}
+          />
+        </motion.div>
 
         <div className={styles.imageContainer}>
           <Image

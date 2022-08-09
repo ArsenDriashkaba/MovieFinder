@@ -54,6 +54,7 @@ export default function Home({ coffeeShops }) {
     isLoading: isInSearch,
     fetchData: handleButtonClick,
     error: locationErrMsg = "error",
+    setIsInSearch,
   } = useTrackLocation();
 
   useEffect(() => {
@@ -62,6 +63,8 @@ export default function Home({ coffeeShops }) {
         if (!latitude || !longitude) {
           return;
         }
+
+        setIsInSearch(true);
 
         const url = getSearchPlacesUrl(
           SEARCH_QUERY,
@@ -73,6 +76,7 @@ export default function Home({ coffeeShops }) {
         const coffeeShopsData = await fetchCoffeeStores(url);
 
         if (coffeeShopsData.length == 0) {
+          setIsInSearch(false);
           return;
         }
 
@@ -87,6 +91,8 @@ export default function Home({ coffeeShops }) {
           type: ACTION_TYPES.SET_COFFEE_STORES,
           payload: { coffeeStoresData: coffeeShopsData },
         });
+
+        setIsInSearch(false);
       } catch (err) {
         console.log(err);
       }

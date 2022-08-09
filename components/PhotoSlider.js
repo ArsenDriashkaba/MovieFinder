@@ -16,8 +16,8 @@ const PhotoSlider = ({ coffeeStoreImages }) => {
       autoplay={{ delay: 5000 }}
       loop
     >
-      {coffeeStoreImages?.map((photo) => (
-        <SwiperSlide>
+      {coffeeStoreImages?.map((photo, index) => (
+        <SwiperSlide key={index}>
           <PhotoSlide imgUrl={photo} />
         </SwiperSlide>
       ))}
