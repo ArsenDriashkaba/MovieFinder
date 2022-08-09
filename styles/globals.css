@@ -4,11 +4,13 @@
   --title1-font-size: 7.5rem;
   --title2-font-size: 8.7rem;
 
+  --gray: rgb(220, 220, 220);
+  --transparentGray: rgba(220, 220, 220, 0.35);
   --logo-main-color: rgb(61, 61, 61);
   --dark-transparent-bg: rgba(38, 25, 16, 0.75);
   --card-transparent-info-bg: rgba(38, 25, 16, 0.7);
   --light-bg: rgb(242, 242, 242);
-  --transparent: rgba(255, 255, 255, 0.2);
+  --transparent: rgba(255, 255, 255, 0.3);
   --transparent-hover: rgba(255, 255, 255, 0.4);
   --default-border-radius: 2rem;
 
@@ -54,6 +56,27 @@ button {
 button:hover {
   color: white;
   background-color: var(--dark-blue);
+}
+
+/*________________________SWIPER JS LIBRARY RESTYLING____________*/
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--transparentGray);
+  transition: 0.2s ease-in-out;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: var(--gray);
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--gray);
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--gray);
 }
 
 /*________________________RESPONSIVENESS_________________________*/

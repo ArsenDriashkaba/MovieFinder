@@ -122,15 +122,24 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
     setIsUpdating,
     likes,
     setLikes,
+    description: additionalInfo?.description || constants.DEFAULT_DESCRIPTION,
   };
   const icoTextList = [
-    { text: address, ico: "location.svg", altIcoMsg: "location icon" },
     {
-      text: neighbourhood,
+      text: address || constants.DEFAULT_ADDRESS,
+      ico: "location.svg",
+      altIcoMsg: "location icon",
+    },
+    {
+      text: neighbourhood || constants.DEFAULT_LOCATION,
       ico: "navigation.svg",
       altIcoMsg: "navigation icon",
     },
-    { text: additionalInfo?.tel, ico: "phone.svg", altIcoMsg: "phone icon" },
+    {
+      text: additionalInfo?.tel || constants.DEFAULT_PHONE_NUMBER,
+      ico: "phone.svg",
+      altIcoMsg: "phone icon",
+    },
   ];
 
   if (router.isFallback) {

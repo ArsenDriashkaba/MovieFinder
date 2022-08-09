@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  width: 15vw;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.message {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.imageContainer {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  object-position: center;
+}

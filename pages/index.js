@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useRef } from "react";
 
 import Head from "next/head";
 import Banner from "../components/Banner";
@@ -41,11 +41,14 @@ export const getStaticProps = async () => {
   };
 };
 
+const executeScroll = (elementRef) => elementRef?.current?.scrollIntoView();
+
 const useCoffeeStoresContext = () => useContext(CoffeeStoresContext);
 
 export default function Home({ coffeeShops }) {
   const { state, dispatch } = useCoffeeStoresContext();
   const { latitude, longitude } = { ...state };
+  const cardSection = useRef(null);
 
   const {
     isLoading: isInSearch,
@@ -97,16 +100,21 @@ export default function Home({ coffeeShops }) {
       <Head>
         <title>Cooffee Shops</title>
         <meta name="description" content="NextJS coffe shops finder" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/static/icons/coffee.svg" />
       </Head>
 
       <main className={styles.main}>
         <Banner
           buttonText={isInSearch ? "Loading..." : "Discover"}
-          handleOnClick={handleButtonClick}
+          handleOnClick={() => {
+            executeScroll(cardSection);
+            handleButtonClick();
+          }}
         />
         {locationErrMsg && <span>{locationErrMsg}</span>}
         <CardList
+          loading={isInSearch}
+          myRef={cardSection}
           locality={state.searchLocality}
           coffeeShops={
             state.coffeeStoresData.length > 0

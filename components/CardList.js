@@ -1,18 +1,25 @@
 import CoffeeCard from "./CoffeeCard";
-
-import styles from "../styles/CardList.module.css";
+import Loading from "./Loading";
 import CardListHeader from "./CardListHeader";
 
-const CardList = ({ coffeeShops, locality }) => {
-  return (
-    <section className={styles.cardListContainer}>
-      <CardListHeader locality={locality} />
+import styles from "../styles/CardList.module.css";
 
-      <div className={styles.container}>
-        {coffeeShops?.map((shop) => (
-          <CoffeeCard coffeeInfo={shop} key={shop.fsq_id} />
-        ))}
-      </div>
+const CardList = ({ coffeeShops, locality, myRef, loading }) => {
+  return (
+    <section ref={myRef} className={styles.cardListContainer}>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <CardListHeader locality={locality} />
+
+          <div className={styles.container}>
+            {coffeeShops?.map((shop) => (
+              <CoffeeCard coffeeInfo={shop} key={shop.fsq_id} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 };

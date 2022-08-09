@@ -1,6 +1,7 @@
 .cardListContainer {
   background-color: var(--light-bg);
   width: 80%;
+  min-height: 100vh;
   margin: 0 auto;
 }
 

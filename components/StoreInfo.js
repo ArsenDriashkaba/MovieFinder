@@ -5,7 +5,16 @@ import Pricing from "./Pricing";
 import UpVoteButton from "./UpVoteButton";
 
 const StoreInfo = ({ value }) => {
-  const { id, setIsUpdating, setLikes, price, rating, likes, title } = {
+  const {
+    id,
+    setIsUpdating,
+    setLikes,
+    price,
+    rating,
+    likes,
+    title,
+    description,
+  } = {
     ...value,
   };
 
@@ -19,7 +28,7 @@ const StoreInfo = ({ value }) => {
         <Rating value={likes} ico="heart.svg" />
       </div>
 
-      <div className={styles.descriptionContainer}>Description.</div>
+      <div className={styles.descriptionContainer}>{description}</div>
       <div className={styles.buttonContainer}>
         <LinkButton text={"To Store"} />
         <UpVoteButton
