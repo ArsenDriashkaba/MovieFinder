@@ -12,6 +12,8 @@ const constants = {
   DEFAULT_LOCATION: "Somewhere in your heart :)",
   DEFAULT_ADDRESS: "In your dreams :)",
   DEFAULT_PHONE_NUMBER: "We use owls :)",
+  DEFAULT_LOADING_TEXT: "Loading...",
+  DEFAULT_DESCRIBE_TEXT: "Describe",
 };
 
 export default constants;

@@ -12,10 +12,16 @@ const UpVoteButton = ({
   const handleOnClick = async () => {
     const newRating = currRating + 1;
 
-    setUpdating(true);
-    await updateCoffeeStore(coffeeStoreId, { rating: newRating });
-    setUpdating(false);
-    setRating(newRating);
+    try {
+      setUpdating(true);
+
+      await updateCoffeeStore(coffeeStoreId, { rating: newRating });
+
+      setUpdating(false);
+      setRating(newRating);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -2,11 +2,11 @@ import Spinner from "./Spinner";
 
 import styles from "../styles/Loading.module.css";
 
-const Loading = () => {
+const Loading = ({ loadingMessage }) => {
   return (
     <section className={styles.container}>
       <div className={styles.wrapper}>
-        <h2 className={styles.message}>Loading</h2>
+        <h2 className={styles.message}>{loadingMessage}</h2>
 
         <Spinner />
       </div>

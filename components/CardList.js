@@ -8,7 +8,7 @@ const CardList = ({ coffeeShops, locality, myRef, loading }) => {
   return (
     <section ref={myRef} className={styles.cardListContainer}>
       {loading ? (
-        <Loading />
+        <Loading loadingMessage={"Preparing your coffee"} />
       ) : (
         <>
           <CardListHeader locality={locality} />

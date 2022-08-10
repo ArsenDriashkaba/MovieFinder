@@ -22,6 +22,8 @@ const {
   DEFAULT_SEARCH_LIMIT2,
   SEARCH_QUERY,
   DEFAULT_QUERY_FIELDS,
+  DEFAULT_DESCRIBE_TEXT,
+  DEFAULT_LOADING_TEXT,
 } = { ...constants };
 
 export const getStaticProps = async () => {
@@ -111,7 +113,7 @@ export default function Home({ coffeeShops }) {
 
       <main className={styles.main}>
         <Banner
-          buttonText={isInSearch ? "Loading..." : "Discover"}
+          buttonText={isInSearch ? DEFAULT_LOADING_TEXT : DEFAULT_DESCRIBE_TEXT}
           handleOnClick={() => {
             executeScroll(cardSection);
             handleButtonClick();
