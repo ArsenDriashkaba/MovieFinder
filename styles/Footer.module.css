@@ -1,3 +1,9 @@
 .footer {
-  color: black;
+  color: White;
+  font-size: 3rem;
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--logo-main-color);
 }

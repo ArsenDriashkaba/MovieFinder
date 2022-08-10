@@ -16,7 +16,6 @@ const Rating = ({ value, ico, isUpdating }) => {
           </div>
         </>
       )}
-      {/* <Spinner /> */}
     </div>
   );
 };
