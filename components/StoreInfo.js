@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import styles from "../styles/CoffeeStoreDynamic.module.css";
 import Rating from "./Rating";
 import LinkButton from "./LinkButton";
@@ -5,16 +7,9 @@ import Pricing from "./Pricing";
 import UpVoteButton from "./UpVoteButton";
 
 const StoreInfo = ({ value }) => {
-  const {
-    id,
-    setIsUpdating,
-    setLikes,
-    price,
-    rating,
-    likes,
-    title,
-    description,
-  } = {
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const { id, setLikes, price, rating, likes, title, description, link } = {
     ...value,
   };
 
@@ -25,12 +20,12 @@ const StoreInfo = ({ value }) => {
 
       <div className={styles.ratingContainer}>
         <Rating value={rating} ico="star.svg" />
-        <Rating value={likes} ico="heart.svg" />
+        <Rating value={likes} ico="heart.svg" isUpdating={isUpdating} />
       </div>
 
       <div className={styles.descriptionContainer}>{description}</div>
       <div className={styles.buttonContainer}>
-        <LinkButton text={"To Store"} />
+        <LinkButton text={"To Store"} link={link} />
         <UpVoteButton
           coffeeStoreId={id}
           currRating={likes}

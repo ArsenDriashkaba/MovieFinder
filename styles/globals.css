@@ -48,14 +48,13 @@ button {
   background-color: white;
   color: var(--dark-blue);
   padding: 1rem 1.5rem;
-  transition: 0.1s ease-in-out;
+  transition: 0.2s ease-in-out;
   cursor: pointer;
   border-radius: var(--border-radius);
 }
 
 button:hover {
-  color: white;
-  background-color: var(--dark-blue);
+  transform: scale(1.1);
 }
 
 /*________________________SWIPER JS LIBRARY RESTYLING____________*/

@@ -83,7 +83,6 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
   const id = router.query.id;
   const [coffeeStoreData, setCoffeeStoreData] = useState(coffeeStore);
   const [likes, setLikes] = useState(0);
-  const [isUpdating, setIsUpdating] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const fetchUrlSwr = `${process.env.NEXT_PUBLIC_LOCAL_API_URL}getCoffeeStore/${id}`;
@@ -119,7 +118,6 @@ const CoffeeStore = ({ coffeeStore, images, comments, additionalInfo }) => {
     ...additionalInfo,
     likes,
     title,
-    setIsUpdating,
     likes,
     setLikes,
     description: additionalInfo?.description || constants.DEFAULT_DESCRIPTION,

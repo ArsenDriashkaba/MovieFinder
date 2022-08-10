@@ -33,7 +33,7 @@ const Banner = ({ handleOnClick, buttonText }) => {
           className={styles.steam}
           animate={{
             x: [-10, 0, -10],
-            y: -10,
+            y: [0, -10, 0],
             opacity: [0.1, 0.3, 0.5, 0.3, 0.1],
           }}
           transition={{
